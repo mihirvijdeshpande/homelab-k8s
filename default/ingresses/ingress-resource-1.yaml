@@ -1,0 +1,46 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  creationTimestamp: "2023-09-08T14:17:24Z"
+  generation: 7
+  name: ingress-resource-1
+  namespace: default
+  resourceVersion: "246477"
+  uid: 8b790ff8-d432-4826-8bbd-dbbbfc3a68bb
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: nginx.mini.internal
+    http:
+      paths:
+      - backend:
+          service:
+            name: nginx-deploy-main
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  - host: snake.mini.internal
+    http:
+      paths:
+      - backend:
+          service:
+            name: hello-world-deployment
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  - host: nextcloud.mini.internal
+    http:
+      paths:
+      - backend:
+          service:
+            name: nextcloud
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+status:
+  loadBalancer:
+    ingress:
+    - ip: 127.0.0.1

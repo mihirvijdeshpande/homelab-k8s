@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2023-09-08T14:15:46Z"
+  labels:
+    run: nginx
+  name: nginx-deploy-main
+  namespace: default
+  resourceVersion: "154860"
+  uid: e471435f-5a70-4f36-9cdf-9a6937ed8e35
+spec:
+  clusterIP: 10.152.183.111
+  clusterIPs:
+  - 10.152.183.111
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    run: nginx-main
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

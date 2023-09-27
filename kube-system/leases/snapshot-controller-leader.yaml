@@ -1,0 +1,14 @@
+apiVersion: coordination.k8s.io/v1
+kind: Lease
+metadata:
+  creationTimestamp: "2023-09-12T18:28:45Z"
+  name: snapshot-controller-leader
+  namespace: kube-system
+  resourceVersion: "3120125"
+  uid: 253aa7b4-2eeb-432a-a84f-fc608f03741f
+spec:
+  acquireTime: "2023-09-12T18:28:45.342675Z"
+  holderIdentity: snapshot-controller-6597bcc578-ldq2p
+  leaseDurationSeconds: 15
+  leaseTransitions: 0
+  renewTime: "2023-09-27T18:42:44.708008Z"

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-08-25T19:22:14Z"
+  name: cronjob-controller
+  namespace: kube-system
+  resourceVersion: "196"
+  uid: 8fcfb9b9-1890-46f7-8c64-4d06fc4c6128

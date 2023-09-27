@@ -1,0 +1,47 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"Role","metadata":{"annotations":{},"name":"nginx-ingress-microk8s-role","namespace":"ingress"},"rules":[{"apiGroups":[""],"resources":["configmaps","endpoints","pods","secrets"],"verbs":["get"]},{"apiGroups":[""],"resourceNames":["ingress-controller-leader"],"resources":["configmaps"],"verbs":["create","update"]},{"apiGroups":[""],"resources":["configmaps"],"verbs":["create"]},{"apiGroups":["coordination.k8s.io"],"resources":["leases"],"verbs":["create","update","patch","get","list","watch"]}]}
+  creationTimestamp: "2023-09-12T15:19:34Z"
+  name: nginx-ingress-microk8s-role
+  namespace: ingress
+  resourceVersion: "210397"
+  uid: 95acde6b-1d7b-4f51-90d0-37d7430036f0
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - endpoints
+  - pods
+  - secrets
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  resourceNames:
+  - ingress-controller-leader
+  resources:
+  - configmaps
+  verbs:
+  - create
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - create
+  - update
+  - patch
+  - get
+  - list
+  - watch

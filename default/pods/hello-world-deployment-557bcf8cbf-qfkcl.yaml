@@ -1,0 +1,126 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: 16e563db9a28b55ba397ad5273b9653b51627925834a182ed2043aeb237294dd
+    cni.projectcalico.org/podIP: 10.1.104.102/32
+    cni.projectcalico.org/podIPs: 10.1.104.102/32
+  creationTimestamp: "2023-09-08T13:52:05Z"
+  generateName: hello-world-deployment-557bcf8cbf-
+  labels:
+    app: hello-world
+    pod-template-hash: 557bcf8cbf
+  name: hello-world-deployment-557bcf8cbf-qfkcl
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: hello-world-deployment-557bcf8cbf
+    uid: 79d3cbc3-e71a-4a1b-9984-98325b6938b0
+  resourceVersion: "3119918"
+  uid: 60d0078f-971d-4c55-8bcf-d5b81382f423
+spec:
+  containers:
+  - image: bhargavshah86/kube-test:v0.1
+    imagePullPolicy: IfNotPresent
+    name: hello-world
+    ports:
+    - containerPort: 80
+      protocol: TCP
+    resources:
+      limits:
+        cpu: 250m
+        memory: 256Mi
+      requests:
+        cpu: 80m
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-fm27v
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: sve15136cn
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-fm27v
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-08T13:52:06Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-27T18:41:17Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-27T18:41:17Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-08T13:52:06Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://7696c49163649a09caf0bb3a8fe089126d5b3ce712b026d8d3a601eaa71f5c03
+    image: docker.io/bhargavshah86/kube-test:v0.1
+    imageID: docker.io/bhargavshah86/kube-test@sha256:c9636388701e3b61db06cba8af5618cc20e071b7e95701f4306f693eb6f168f8
+    lastState:
+      terminated:
+        containerID: containerd://f85c3b21c8af6ca0fff44a4268f142351623dc9f10d393fa49bd00ed6e986f9c
+        exitCode: 255
+        finishedAt: "2023-09-27T18:39:16Z"
+        reason: Unknown
+        startedAt: "2023-09-27T05:37:58Z"
+    name: hello-world
+    ready: true
+    restartCount: 21
+    started: true
+    state:
+      running:
+        startedAt: "2023-09-27T18:41:16Z"
+  hostIP: 192.168.1.9
+  phase: Running
+  podIP: 10.1.104.102
+  podIPs:
+  - ip: 10.1.104.102
+  qosClass: Burstable
+  startTime: "2023-09-08T13:52:06Z"

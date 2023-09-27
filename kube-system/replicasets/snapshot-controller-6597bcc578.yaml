@@ -1,0 +1,83 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "1"
+    meta.helm.sh/release-name: csi-driver-nfs
+    meta.helm.sh/release-namespace: kube-system
+  creationTimestamp: "2023-09-12T18:26:44Z"
+  generation: 1
+  labels:
+    app: snapshot-controller
+    pod-template-hash: 6597bcc578
+  name: snapshot-controller-6597bcc578
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: snapshot-controller
+    uid: 7ac055f0-9c8d-45d3-8be4-8bd002a80530
+  resourceVersion: "3120084"
+  uid: 663eec68-13ac-4fcb-8d37-b089308d8bcd
+spec:
+  minReadySeconds: 15
+  replicas: 1
+  selector:
+    matchLabels:
+      app: snapshot-controller
+      pod-template-hash: 6597bcc578
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: snapshot-controller
+        pod-template-hash: 6597bcc578
+    spec:
+      containers:
+      - args:
+        - --v=2
+        - --leader-election=true
+        - --leader-election-namespace=kube-system
+        image: registry.k8s.io/sig-storage/snapshot-controller:v6.2.2
+        imagePullPolicy: IfNotPresent
+        name: snapshot-controller
+        resources:
+          limits:
+            memory: 300Mi
+          requests:
+            cpu: 10m
+            memory: 20Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
+      priorityClassName: system-cluster-critical
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      serviceAccount: snapshot-controller
+      serviceAccountName: snapshot-controller
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+        operator: Exists
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/controlplane
+        operator: Exists
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/control-plane
+        operator: Exists
+status:
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

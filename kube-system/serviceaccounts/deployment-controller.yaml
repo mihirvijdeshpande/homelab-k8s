@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-08-25T19:22:12Z"
+  name: deployment-controller
+  namespace: kube-system
+  resourceVersion: "180"
+  uid: de6d8f30-9cd5-473e-aedc-c6a1b694b10f

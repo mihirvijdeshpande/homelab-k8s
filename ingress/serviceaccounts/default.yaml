@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-09-12T15:19:34Z"
+  name: default
+  namespace: ingress
+  resourceVersion: "210395"
+  uid: 960f0d2f-0b44-4754-a359-1af8ff2e2b6f

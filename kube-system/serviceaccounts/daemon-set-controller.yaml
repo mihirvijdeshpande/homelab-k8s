@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-08-25T19:22:13Z"
+  name: daemon-set-controller
+  namespace: kube-system
+  resourceVersion: "187"
+  uid: 3da734ce-51fc-45f8-bd78-b0132657a97d

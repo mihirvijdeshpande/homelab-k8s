@@ -1,0 +1,15 @@
+apiVersion: coordination.k8s.io/v1
+kind: Lease
+metadata:
+  creationTimestamp: "2023-09-12T14:32:59Z"
+  labels:
+    apiserver.kubernetes.io/identity: kube-apiserver
+    kubernetes.io/hostname: sve15136cn
+  name: apiserver-z6vkis7kr2dplnyvpem4cl6hxu
+  namespace: kube-system
+  resourceVersion: "3120123"
+  uid: 0dd57db9-c323-4538-aa6c-8d45ddb1a6b4
+spec:
+  holderIdentity: apiserver-z6vkis7kr2dplnyvpem4cl6hxu_fac0297b-f604-4f72-ac6a-7dcb4b33da75
+  leaseDurationSeconds: 3600
+  renewTime: "2023-09-27T18:42:44.257954Z"

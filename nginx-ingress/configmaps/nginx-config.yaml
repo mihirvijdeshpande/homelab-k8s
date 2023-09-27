@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":null,"kind":"ConfigMap","metadata":{"annotations":{},"name":"nginx-config","namespace":"nginx-ingress"}}
+  creationTimestamp: "2023-09-08T14:01:58Z"
+  name: nginx-config
+  namespace: nginx-ingress
+  resourceVersion: "153457"
+  uid: cdcdcb88-5273-4441-9c44-17d05414aa35

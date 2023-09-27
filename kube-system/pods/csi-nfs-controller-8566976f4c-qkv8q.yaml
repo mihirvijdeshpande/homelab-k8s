@@ -1,0 +1,319 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2023-09-12T18:26:44Z"
+  generateName: csi-nfs-controller-8566976f4c-
+  labels:
+    app: csi-nfs-controller
+    app.kubernetes.io/instance: csi-driver-nfs
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: csi-driver-nfs
+    app.kubernetes.io/version: v4.4.0
+    helm.sh/chart: csi-driver-nfs-v4.4.0
+    pod-template-hash: 8566976f4c
+  name: csi-nfs-controller-8566976f4c-qkv8q
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: csi-nfs-controller-8566976f4c
+    uid: 1816a1bb-a449-4777-ae6f-75d4394a6ef4
+  resourceVersion: "3120044"
+  uid: 58562ae3-3408-4a0b-8de3-8f64be6a1d96
+spec:
+  containers:
+  - args:
+    - -v=2
+    - --csi-address=$(ADDRESS)
+    - --leader-election
+    - --leader-election-namespace=kube-system
+    - --extra-create-metadata=true
+    env:
+    - name: ADDRESS
+      value: /csi/csi.sock
+    image: registry.k8s.io/sig-storage/csi-provisioner:v3.5.0
+    imagePullPolicy: IfNotPresent
+    name: csi-provisioner
+    resources:
+      limits:
+        memory: 400Mi
+      requests:
+        cpu: 10m
+        memory: 20Mi
+    securityContext:
+      readOnlyRootFilesystem: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /csi
+      name: socket-dir
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-dgffr
+      readOnly: true
+  - args:
+    - --v=2
+    - --csi-address=$(ADDRESS)
+    - --leader-election-namespace=kube-system
+    - --leader-election
+    env:
+    - name: ADDRESS
+      value: /csi/csi.sock
+    image: registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
+    imagePullPolicy: IfNotPresent
+    name: csi-snapshotter
+    resources:
+      limits:
+        memory: 200Mi
+      requests:
+        cpu: 10m
+        memory: 20Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /csi
+      name: socket-dir
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-dgffr
+      readOnly: true
+  - args:
+    - --csi-address=/csi/csi.sock
+    - --probe-timeout=3s
+    - --health-port=29652
+    - --v=2
+    image: registry.k8s.io/sig-storage/livenessprobe:v2.10.0
+    imagePullPolicy: IfNotPresent
+    name: liveness-probe
+    resources:
+      limits:
+        memory: 100Mi
+      requests:
+        cpu: 10m
+        memory: 20Mi
+    securityContext:
+      readOnlyRootFilesystem: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /csi
+      name: socket-dir
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-dgffr
+      readOnly: true
+  - args:
+    - --v=5
+    - --nodeid=$(NODE_ID)
+    - --endpoint=$(CSI_ENDPOINT)
+    - --drivername=nfs.csi.k8s.io
+    - --mount-permissions=0
+    - --working-mount-dir=/tmp
+    - --default-ondelete-policy=delete
+    env:
+    - name: NODE_ID
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: CSI_ENDPOINT
+      value: unix:///csi/csi.sock
+    image: registry.k8s.io/sig-storage/nfsplugin:v4.4.0
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 5
+      httpGet:
+        path: /healthz
+        port: healthz
+        scheme: HTTP
+      initialDelaySeconds: 30
+      periodSeconds: 30
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: nfs
+    ports:
+    - containerPort: 29652
+      hostPort: 29652
+      name: healthz
+      protocol: TCP
+    resources:
+      limits:
+        memory: 200Mi
+      requests:
+        cpu: 10m
+        memory: 20Mi
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities:
+        add:
+        - SYS_ADMIN
+      privileged: true
+      readOnlyRootFilesystem: true
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/snap/microk8s/common/var/lib/kubelet/pods
+      mountPropagation: Bidirectional
+      name: pods-mount-dir
+    - mountPath: /csi
+      name: socket-dir
+    - mountPath: /tmp
+      name: tmp-dir
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-dgffr
+      readOnly: true
+  dnsPolicy: ClusterFirstWithHostNet
+  enableServiceLinks: true
+  hostNetwork: true
+  nodeName: sve15136cn
+  nodeSelector:
+    kubernetes.io/os: linux
+  preemptionPolicy: PreemptLowerPriority
+  priority: 2000000000
+  priorityClassName: system-cluster-critical
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccount: csi-nfs-controller-sa
+  serviceAccountName: csi-nfs-controller-sa
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+    operator: Exists
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/controlplane
+    operator: Exists
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /var/snap/microk8s/common/var/lib/kubelet/pods
+      type: Directory
+    name: pods-mount-dir
+  - emptyDir: {}
+    name: socket-dir
+  - emptyDir: {}
+    name: tmp-dir
+  - name: kube-api-access-dgffr
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-12T18:26:48Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-27T18:42:12Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-27T18:42:12Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-12T18:26:45Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://c5b8a682666a8b6742b9ef8dc08fbee05d2036d59e559708a8432b0efa4c7a64
+    image: registry.k8s.io/sig-storage/csi-provisioner:v3.5.0
+    imageID: registry.k8s.io/sig-storage/csi-provisioner@sha256:d078dc174323407e8cc6f0f9abd4efaac5db27838f1564d0253d5e3233e3f17f
+    lastState:
+      terminated:
+        containerID: containerd://cbfa78bde4a88896c22e7e35f3b88bc0342a5ba6f656a2f2e75346a2316fb07d
+        exitCode: 255
+        finishedAt: "2023-09-27T18:41:37Z"
+        reason: Error
+        startedAt: "2023-09-27T18:39:37Z"
+    name: csi-provisioner
+    ready: true
+    restartCount: 298
+    started: true
+    state:
+      running:
+        startedAt: "2023-09-27T18:42:03Z"
+  - containerID: containerd://45b1649c14ad9252184a46cf4fda4cbd61b09184e3f2cabb4c57667e809141a5
+    image: registry.k8s.io/sig-storage/csi-snapshotter:v6.2.2
+    imageID: registry.k8s.io/sig-storage/csi-snapshotter@sha256:becc53e25b96573f61f7469923a92fb3e9d3a3781732159954ce0d9da07233a2
+    lastState:
+      terminated:
+        containerID: containerd://ac5a1d077e6936bb121c6c542c65a1e2710faedcaeaabe604017561d31baa8d1
+        exitCode: 255
+        finishedAt: "2023-09-27T18:41:36Z"
+        reason: Error
+        startedAt: "2023-09-27T18:41:03Z"
+    name: csi-snapshotter
+    ready: true
+    restartCount: 328
+    started: true
+    state:
+      running:
+        startedAt: "2023-09-27T18:42:12Z"
+  - containerID: containerd://35730d928b42062c0cca9ea7abc8f52ecc4cc0ebbf8c5f8f80a5861ae404a109
+    image: registry.k8s.io/sig-storage/livenessprobe:v2.10.0
+    imageID: registry.k8s.io/sig-storage/livenessprobe@sha256:4dc0b87ccd69f9865b89234d8555d3a614ab0a16ed94a3016ffd27f8106132ce
+    lastState:
+      terminated:
+        containerID: containerd://cd347bfe0071a0dcd2b61d9f9848a6108909e66371c6b18372492f662653d8e9
+        exitCode: 255
+        finishedAt: "2023-09-27T18:39:14Z"
+        reason: Unknown
+        startedAt: "2023-09-27T05:36:46Z"
+    name: liveness-probe
+    ready: true
+    restartCount: 14
+    started: true
+    state:
+      running:
+        startedAt: "2023-09-27T18:39:54Z"
+  - containerID: containerd://54c43f54c44bac3539686df18656c48df3aef3883478dd9e78bc04eca61f002c
+    image: registry.k8s.io/sig-storage/nfsplugin:v4.4.0
+    imageID: registry.k8s.io/sig-storage/nfsplugin@sha256:971cb526bc0108cca7d8efda32102629cb362f99bbd4879fd381bea1b2014ab4
+    lastState:
+      terminated:
+        containerID: containerd://f5a372bad4d508f9d60d8b490b84803219cdc0071c051eab49ed23af2c9f3a60
+        exitCode: 255
+        finishedAt: "2023-09-27T18:39:16Z"
+        reason: Unknown
+        startedAt: "2023-09-27T05:36:48Z"
+    name: nfs
+    ready: true
+    restartCount: 15
+    started: true
+    state:
+      running:
+        startedAt: "2023-09-27T18:40:04Z"
+  hostIP: 192.168.1.9
+  phase: Running
+  podIP: 192.168.1.9
+  podIPs:
+  - ip: 192.168.1.9
+  qosClass: Burstable
+  startTime: "2023-09-12T18:26:48Z"

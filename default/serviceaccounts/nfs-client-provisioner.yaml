@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-09-12T19:16:11Z"
+  name: nfs-client-provisioner
+  namespace: default
+  resourceVersion: "234697"
+  uid: 7e2eff01-b66b-4f81-8665-ef915c3edf5b

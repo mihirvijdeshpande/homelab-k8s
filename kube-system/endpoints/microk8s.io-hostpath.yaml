@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"hostpath-provisioner-7df77bc496-pzh8j_3687cdb1-6baf-4d3d-ad63-ad1cb56097ca","leaseDurationSeconds":15,"acquireTime":"2023-09-27T18:42:32Z","renewTime":"2023-09-27T18:42:32Z","leaderTransitions":296}'
+  creationTimestamp: "2023-09-08T10:27:56Z"
+  name: microk8s.io-hostpath
+  namespace: kube-system
+  resourceVersion: "3120079"
+  uid: a8f07aac-81ab-49cb-ada3-76c0b528a6ae

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-08-25T19:22:13Z"
+  name: clusterrole-aggregation-controller
+  namespace: kube-system
+  resourceVersion: "190"
+  uid: 297e3368-84e5-46f0-8d83-29dc98fa0608

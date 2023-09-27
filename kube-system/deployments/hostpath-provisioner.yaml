@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"k8s-app":"hostpath-provisioner"},"name":"hostpath-provisioner","namespace":"kube-system"},"spec":{"replicas":1,"revisionHistoryLimit":0,"selector":{"matchLabels":{"k8s-app":"hostpath-provisioner"}},"template":{"metadata":{"labels":{"k8s-app":"hostpath-provisioner"}},"spec":{"containers":[{"env":[{"name":"NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}},{"name":"NODE_NAME","valueFrom":{"fieldRef":{"fieldPath":"spec.nodeName"}}},{"name":"PV_DIR","value":"/var/snap/microk8s/common/default-storage"},{"name":"BUSYBOX_IMAGE","value":"busybox:1.28.4"}],"image":"cdkbot/hostpath-provisioner:1.4.2","name":"hostpath-provisioner","volumeMounts":[{"mountPath":"/var/snap/microk8s/common/default-storage","name":"pv-volume"}]}],"serviceAccountName":"microk8s-hostpath","volumes":[{"hostPath":{"path":"/var/snap/microk8s/common/default-storage"},"name":"pv-volume"}]}}}}
+  creationTimestamp: "2023-09-08T10:27:18Z"
+  generation: 1
+  labels:
+    k8s-app: hostpath-provisioner
+  name: hostpath-provisioner
+  namespace: kube-system
+  resourceVersion: "3120061"
+  uid: e93c5191-c0c2-44bd-a645-5a30b50d37a7
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      k8s-app: hostpath-provisioner
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        k8s-app: hostpath-provisioner
+    spec:
+      containers:
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: PV_DIR
+          value: /var/snap/microk8s/common/default-storage
+        - name: BUSYBOX_IMAGE
+          value: busybox:1.28.4
+        image: cdkbot/hostpath-provisioner:1.4.2
+        imagePullPolicy: IfNotPresent
+        name: hostpath-provisioner
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/snap/microk8s/common/default-storage
+          name: pv-volume
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: microk8s-hostpath
+      serviceAccountName: microk8s-hostpath
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /var/snap/microk8s/common/default-storage
+          type: ""
+        name: pv-volume
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2023-09-08T10:27:19Z"
+    lastUpdateTime: "2023-09-08T10:27:57Z"
+    message: ReplicaSet "hostpath-provisioner-7df77bc496" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2023-09-27T18:42:23Z"
+    lastUpdateTime: "2023-09-27T18:42:23Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

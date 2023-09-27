@@ -1,0 +1,72 @@
+apiVersion: v1
+data:
+  client-ca-file: |
+    -----BEGIN CERTIFICATE-----
+    MIIDDzCCAfegAwIBAgIURErJrVPO7iaFfBhEftNsYjO5B9EwDQYJKoZIhvcNAQEL
+    BQAwFzEVMBMGA1UEAwwMMTAuMTUyLjE4My4xMB4XDTIzMDgyNTE5MjA1NFoXDTMz
+    MDgyMjE5MjA1NFowFzEVMBMGA1UEAwwMMTAuMTUyLjE4My4xMIIBIjANBgkqhkiG
+    9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1Xy+7H62WBuBj6TFSe361Bt/Ya02ckGfg5gK
+    IiZX5nCne8G3G+mxkphrKcOXiSnNBqujnFIx7eES2jElgyd7+oFJf5a+z3Px34s9
+    sPtEtd9JA1YfZcJzQhZ/L24bsYVytj2Qr3+ygY2i1gSHe3G1JWG5Xtr9RV9psD8g
+    fM2ZyRqhP7ojFmeZNxCl8w0wB5O9r5PeBZppFV7fjCFVqSq72Jwz+uEDoQ7AAUnl
+    ifQgzZeOEBB9g1saYlcqykui5Rc4x+yGq71cLFk8PXR1p6Pa6R50M0mvADLl0A6z
+    p4dTeFXsoHnyiS7hzR8tiTNniCOTgC2xk3jAv7uAEGz/xl8N3wIDAQABo1MwUTAd
+    BgNVHQ4EFgQU/fpyK0SvASbVyykb+migA8GCOyMwHwYDVR0jBBgwFoAU/fpyK0Sv
+    ASbVyykb+migA8GCOyMwDwYDVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0BAQsFAAOC
+    AQEAWAkr4Q9/kbahgwxGcTuoUM2wrfy1K2TrV400p4XAcSdylkS9qzGwGFErNh7D
+    9fObIVpB+iRG6Oh6jTjpCJIU2WW50o9S5+FvmKBStk3xY8TWZ+maEiIv71P9Lchq
+    1DxBW0ncWrIcjhPoJkcRmquk82ULQ2VY8kNwPBe4EikIKh/Zh6Vdk1L2TPkKE7AY
+    Uj81WQ4TeGnRz9eOZGpsPA5bhH0lz/KkfeneIH/9Jrslj75qYzpL1+6WxfLR/upy
+    GnedaHySQWK5Yrxo6LgHHKQcoXu9FLrjIH/JWSnr7cLexYNvaI1viUH4zMgGPIUA
+    1lAcnPoocvJpZOIZylSWcneGZA==
+    -----END CERTIFICATE-----
+    -----BEGIN CERTIFICATE-----
+    MIIDDzCCAfegAwIBAgIUE7Qdzt7BbBZIB/1mszQI80soe84wDQYJKoZIhvcNAQEL
+    BQAwFzEVMBMGA1UEAwwMMTAuMTUyLjE4My4xMB4XDTIzMDkwODA5MTExNloXDTMz
+    MDkwNTA5MTExNlowFzEVMBMGA1UEAwwMMTAuMTUyLjE4My4xMIIBIjANBgkqhkiG
+    9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1Xy+7H62WBuBj6TFSe361Bt/Ya02ckGfg5gK
+    IiZX5nCne8G3G+mxkphrKcOXiSnNBqujnFIx7eES2jElgyd7+oFJf5a+z3Px34s9
+    sPtEtd9JA1YfZcJzQhZ/L24bsYVytj2Qr3+ygY2i1gSHe3G1JWG5Xtr9RV9psD8g
+    fM2ZyRqhP7ojFmeZNxCl8w0wB5O9r5PeBZppFV7fjCFVqSq72Jwz+uEDoQ7AAUnl
+    ifQgzZeOEBB9g1saYlcqykui5Rc4x+yGq71cLFk8PXR1p6Pa6R50M0mvADLl0A6z
+    p4dTeFXsoHnyiS7hzR8tiTNniCOTgC2xk3jAv7uAEGz/xl8N3wIDAQABo1MwUTAd
+    BgNVHQ4EFgQU/fpyK0SvASbVyykb+migA8GCOyMwHwYDVR0jBBgwFoAU/fpyK0Sv
+    ASbVyykb+migA8GCOyMwDwYDVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0BAQsFAAOC
+    AQEAVC3xYhhThAx0UNzNO5cxuKD/U0u8uDkDZXQW688SVwD/+lShcpeZCAwXQPkM
+    c9Jfr/gFRapX9L/dNDT/f9gRwc4CNRO5ilztniU8if0dkVbcaVMPCAQEcoALnPfu
+    ZoeMg4NFWCMGs4wuNU0jGvBP9j2a+OCXWEbMLdQki2lhRTs4kXgWUlCclzljutMO
+    LLPII6y82r/grMyFJcpkTRwbr2PnxEJvHGHFO6muNYMfCd2DWk/ZQvTYgVYH7uIc
+    ew+tcTj6wwIWOrLrmSad2pXx3o7IIgKBZLRuAs/LSb0y+0f1Uf0utu6QzBa2pPpw
+    LyfP3Eqx3TBuH1a6V3lEEOZXTQ==
+    -----END CERTIFICATE-----
+  requestheader-allowed-names: '["front-proxy-client"]'
+  requestheader-client-ca-file: |
+    -----BEGIN CERTIFICATE-----
+    MIIDEzCCAfugAwIBAgIUCwr638J2gaayx/bBVX6NK0U9NxgwDQYJKoZIhvcNAQEL
+    BQAwGTEXMBUGA1UEAwwOZnJvbnQtcHJveHktY2EwHhcNMjMwODI1MTkyMDU0WhcN
+    MzMwODIyMTkyMDU0WjAZMRcwFQYDVQQDDA5mcm9udC1wcm94eS1jYTCCASIwDQYJ
+    KoZIhvcNAQEBBQADggEPADCCAQoCggEBAJj6T8sIYc4cLMwgzziGsO5Rb2P09G3Y
+    S20VObV3dH89vkSUWoqTwTel1EcW1MxDwSDyknwS9BvZsj8i3GSSsqLBLV4StIAT
+    l4vUwhXtcEcQ4AwRPbnVKawKu6kkRpY2+v+loctSkwY+3Wpb3BJ+Wck/DMnM1S6d
+    ZjW72LhX+tJ8oT+42YiUdmyIlPDguCZ8ALlVhXxDAt2GEsqkrWFLWFt5msUSH4ky
+    ZgY8OYw9jasvoajVbnbM4oncZo/Ae+VAXwyK6EIiAUET9jWCkKPYxMhoCr0fX9ex
+    x8E0pPlT+IPS8rymjtKiUr+ijw/iMUacs6knndEWYQ5GDC7W0ZU6C0UCAwEAAaNT
+    MFEwHQYDVR0OBBYEFBZ0t3PItC4JtPLlt0KOQRD4R6kIMB8GA1UdIwQYMBaAFBZ0
+    t3PItC4JtPLlt0KOQRD4R6kIMA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQEL
+    BQADggEBAHmL5YvnAKobKTuVACTCUdahTDGeG4OE7xYTBU6LHABwbQWqd90IYXZF
+    lE/+fIgWAYhQyzVFXMA0RLEnblj4DqM4EOfN3cc/EvhqRlqPZk9y2iWrY8Y3wYyx
+    2Nb0o7wWZwatnHloi57AI3//6bDt89U3JCugamHWWGR+sc/RPbBUKZ9n96H1JLhe
+    3JvX1hk4ot0yC+vsqXerlm9Rurr/9jCnZBjmZzp22Afpgp0GcW/MRaUm+wy7mVy/
+    QTJE7ViSwLZOQiogCDEytGiLsNWrIMWUwssgM+4RLuzzi6wqPa2OY8V5IiW/9knI
+    i95b4+rHOmoCfoIZD6v390aG4Nuinaw=
+    -----END CERTIFICATE-----
+  requestheader-extra-headers-prefix: '["X-Remote-Extra-"]'
+  requestheader-group-headers: '["X-Remote-Group"]'
+  requestheader-username-headers: '["X-Remote-User"]'
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2023-08-25T19:21:56Z"
+  name: extension-apiserver-authentication
+  namespace: kube-system
+  resourceVersion: "126634"
+  uid: 7cce1a9c-be91-4592-b812-fdb8a507ba7f

@@ -1,0 +1,41 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.1.104.94
+  conditions:
+    ready: true
+    serving: true
+    terminating: false
+  nodeName: sve15136cn
+  targetRef:
+    kind: Pod
+    name: nginx-deploy-main-59657668d9-tgfq6
+    namespace: default
+    uid: 7011e9aa-de27-49ec-8732-4416528c89f2
+kind: EndpointSlice
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2023-09-27T18:41:58Z"
+  creationTimestamp: "2023-09-08T14:15:46Z"
+  generateName: nginx-deploy-main-
+  generation: 46
+  labels:
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    kubernetes.io/service-name: nginx-deploy-main
+    run: nginx
+  name: nginx-deploy-main-26mjm
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: nginx-deploy-main
+    uid: e471435f-5a70-4f36-9cdf-9a6937ed8e35
+  resourceVersion: "3120009"
+  uid: 80842692-91bf-4ce0-abde-1cff08a2a691
+ports:
+- name: ""
+  port: 80
+  protocol: TCP

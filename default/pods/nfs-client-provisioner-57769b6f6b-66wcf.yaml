@@ -1,0 +1,130 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: 3175cb1426267a3328c2dd0a670b98aa7f35067702842e0fca69f4e436cb4a44
+    cni.projectcalico.org/podIP: 10.1.104.121/32
+    cni.projectcalico.org/podIPs: 10.1.104.121/32
+  creationTimestamp: "2023-09-12T19:43:15Z"
+  generateName: nfs-client-provisioner-57769b6f6b-
+  labels:
+    app: nfs-client-provisioner
+    pod-template-hash: 57769b6f6b
+  name: nfs-client-provisioner-57769b6f6b-66wcf
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: nfs-client-provisioner-57769b6f6b
+    uid: 86c73f7b-8a59-42a3-86e4-a2216af600dd
+  resourceVersion: "3119954"
+  uid: 95fa57e6-39f9-4c3c-8694-b939e238c0e1
+spec:
+  containers:
+  - env:
+    - name: PROVISIONER_NAME
+      value: k8s-sigs.io/nfs-subdir-external-provisioner
+    - name: NFS_SERVER
+      value: 192.168.1.9
+    - name: NFS_PATH
+      value: /srv/nfs/kubedata
+    image: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2
+    imagePullPolicy: IfNotPresent
+    name: nfs-client-provisioner
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /persistentvolumes
+      name: nfs-client-root
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-wbxjc
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: sve15136cn
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: nfs-client-provisioner
+  serviceAccountName: nfs-client-provisioner
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: nfs-client-root
+    nfs:
+      path: /srv/nfs/kubedata
+      server: 192.168.1.9
+  - name: kube-api-access-wbxjc
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-12T19:43:16Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-27T18:41:35Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-27T18:41:35Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-12T19:43:16Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://2192be9a2078050467bce5a8a97cf8661cbd8095139d68b74d3a4146854f9ca0
+    image: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2
+    imageID: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner@sha256:63d5e04551ec8b5aae83b6f35938ca5ddc50a88d85492d9731810c31591fa4c9
+    lastState:
+      terminated:
+        containerID: containerd://c6c5c6d8bf5492b441c913ba4bc81040f0ad77eb755cb9c7215c207ada7b10aa
+        exitCode: 255
+        finishedAt: "2023-09-27T18:39:13Z"
+        reason: Unknown
+        startedAt: "2023-09-27T05:37:37Z"
+    name: nfs-client-provisioner
+    ready: true
+    restartCount: 295
+    started: true
+    state:
+      running:
+        startedAt: "2023-09-27T18:41:34Z"
+  hostIP: 192.168.1.9
+  phase: Running
+  podIP: 10.1.104.121
+  podIPs:
+  - ip: 10.1.104.121
+  qosClass: BestEffort
+  startTime: "2023-09-12T19:43:16Z"

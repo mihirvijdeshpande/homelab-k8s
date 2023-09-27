@@ -1,0 +1,140 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: b2e65ec809c666319971860f7a47c0d015f16f4ab62642b205ea573b2c9ecf2b
+    cni.projectcalico.org/podIP: 10.1.104.111/32
+    cni.projectcalico.org/podIPs: 10.1.104.111/32
+  creationTimestamp: "2023-09-12T18:26:44Z"
+  generateName: snapshot-controller-6597bcc578-
+  labels:
+    app: snapshot-controller
+    pod-template-hash: 6597bcc578
+  name: snapshot-controller-6597bcc578-ldq2p
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: snapshot-controller-6597bcc578
+    uid: 663eec68-13ac-4fcb-8d37-b089308d8bcd
+  resourceVersion: "3120031"
+  uid: 5392f7af-e7ca-41d5-a98b-f0926de82dfc
+spec:
+  containers:
+  - args:
+    - --v=2
+    - --leader-election=true
+    - --leader-election-namespace=kube-system
+    image: registry.k8s.io/sig-storage/snapshot-controller:v6.2.2
+    imagePullPolicy: IfNotPresent
+    name: snapshot-controller
+    resources:
+      limits:
+        memory: 300Mi
+      requests:
+        cpu: 10m
+        memory: 20Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-ndfqt
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: sve15136cn
+  nodeSelector:
+    kubernetes.io/os: linux
+  preemptionPolicy: PreemptLowerPriority
+  priority: 2000000000
+  priorityClassName: system-cluster-critical
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
+  serviceAccount: snapshot-controller
+  serviceAccountName: snapshot-controller
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+    operator: Exists
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/controlplane
+    operator: Exists
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
+    operator: Exists
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-ndfqt
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-12T18:26:48Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-27T18:42:06Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-27T18:42:06Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-12T18:26:45Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://25b462c09d4c9c969827282a5602831cd04891865714d9e175f2ed9da9800a14
+    image: registry.k8s.io/sig-storage/snapshot-controller:v6.2.2
+    imageID: registry.k8s.io/sig-storage/snapshot-controller@sha256:fb95b65bb88f319f0f7d5397c401a654164f11a191f466b4026fa36085c7141b
+    lastState:
+      terminated:
+        containerID: containerd://c7a2073e33cfb26d49e6dfda929fd89d68f038ef59d75b93f881a200ff0f751e
+        exitCode: 255
+        finishedAt: "2023-09-27T18:41:37Z"
+        reason: Error
+        startedAt: "2023-09-27T18:41:14Z"
+    name: snapshot-controller
+    ready: true
+    restartCount: 338
+    started: true
+    state:
+      running:
+        startedAt: "2023-09-27T18:42:05Z"
+  hostIP: 192.168.1.9
+  phase: Running
+  podIP: 10.1.104.111
+  podIPs:
+  - ip: 10.1.104.111
+  qosClass: Burstable
+  startTime: "2023-09-12T18:26:48Z"

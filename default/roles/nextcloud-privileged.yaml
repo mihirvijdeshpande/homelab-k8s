@@ -1,0 +1,22 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+    meta.helm.sh/release-name: nextcloud
+    meta.helm.sh/release-namespace: default
+  creationTimestamp: "2023-09-12T20:51:13Z"
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  name: nextcloud-privileged
+  namespace: default
+  resourceVersion: "246669"
+  uid: 66ea6c17-d605-49b1-ae73-3381e8c27f8d
+rules:
+- apiGroups:
+  - extensions
+  resourceNames:
+  - privileged
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use

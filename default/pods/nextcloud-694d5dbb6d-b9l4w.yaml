@@ -1,0 +1,200 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: eb15aa8192f2ac3764743ffac9f2fd2c8d6f81dd8b249d613d4cb759aeb66513
+    cni.projectcalico.org/podIP: 10.1.104.116/32
+    cni.projectcalico.org/podIPs: 10.1.104.116/32
+    nextcloud-config-hash: a5aae02b1b8278a9c8a2dc143e82d3737fc295f62c34afd617207f37d1b2b438
+    php-config-hash: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
+  creationTimestamp: "2023-09-12T20:51:18Z"
+  generateName: nextcloud-694d5dbb6d-
+  labels:
+    app.kubernetes.io/component: app
+    app.kubernetes.io/instance: nextcloud
+    app.kubernetes.io/name: nextcloud
+    pod-template-hash: 694d5dbb6d
+  name: nextcloud-694d5dbb6d-b9l4w
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: nextcloud-694d5dbb6d
+    uid: f29e79bb-f010-4822-a2f3-0823982cb7a1
+  resourceVersion: "3120036"
+  uid: 27009d2d-d0a9-46b0-9e86-9a3ac5c29333
+spec:
+  containers:
+  - env:
+    - name: SQLITE_DATABASE
+      value: nextcloud
+    - name: NEXTCLOUD_ADMIN_USER
+      valueFrom:
+        secretKeyRef:
+          key: nextcloud-username
+          name: nextcloud
+    - name: NEXTCLOUD_ADMIN_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          key: nextcloud-password
+          name: nextcloud
+    - name: NEXTCLOUD_TRUSTED_DOMAINS
+      value: nextcloud.mini.internal
+    - name: NEXTCLOUD_DATA_DIR
+      value: /var/www/html/data
+    image: nextcloud:27.0.2-apache
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      failureThreshold: 30
+      httpGet:
+        httpHeaders:
+        - name: Host
+          value: nextcloud.mini.internal
+        path: /status.php
+        port: 80
+        scheme: HTTP
+      initialDelaySeconds: 300
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    name: nextcloud
+    ports:
+    - containerPort: 80
+      name: http
+      protocol: TCP
+    readinessProbe:
+      failureThreshold: 30
+      httpGet:
+        httpHeaders:
+        - name: Host
+          value: nextcloud.mini.internal
+        path: /status.php
+        port: 80
+        scheme: HTTP
+      initialDelaySeconds: 300
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/www/
+      name: nextcloud-main
+      subPath: root
+    - mountPath: /var/www/html
+      name: nextcloud-main
+      subPath: html
+    - mountPath: /var/www/html/data
+      name: nextcloud-data
+      subPath: data
+    - mountPath: /var/www/html/config
+      name: nextcloud-main
+      subPath: config
+    - mountPath: /var/www/html/custom_apps
+      name: nextcloud-main
+      subPath: custom_apps
+    - mountPath: /var/www/tmp
+      name: nextcloud-main
+      subPath: tmp
+    - mountPath: /var/www/html/themes
+      name: nextcloud-main
+      subPath: themes
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-4pw6c
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: sve15136cn
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 33
+  serviceAccount: nextcloud-serviceaccount
+  serviceAccountName: nextcloud-serviceaccount
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: nextcloud-main
+    persistentVolumeClaim:
+      claimName: nextcloud-nextcloud
+  - name: nextcloud-data
+    persistentVolumeClaim:
+      claimName: nextcloud-nextcloud-data
+  - name: kube-api-access-4pw6c
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-12T20:51:19Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-27T18:39:24Z"
+    message: 'containers with unready status: [nextcloud]'
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-27T18:39:24Z"
+    message: 'containers with unready status: [nextcloud]'
+    reason: ContainersNotReady
+    status: "False"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-12T20:51:18Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://ed8844a2dbb7e3e6ba0129e52a3124b5c924689ce3cbf08308eba7b7571f6164
+    image: docker.io/library/nextcloud:27.0.2-apache
+    imageID: docker.io/library/nextcloud@sha256:cabfe20ae4ce37fc6d3ac0b4880b8b3180a572850d1f01ee8001faa6f46ae6c1
+    lastState:
+      terminated:
+        containerID: containerd://f18f19a1eef5f6f154be6ed5c613d9d87b6abd8a484805af79960b4632eac3b7
+        exitCode: 255
+        finishedAt: "2023-09-27T18:39:15Z"
+        reason: Unknown
+        startedAt: "2023-09-27T05:38:00Z"
+    name: nextcloud
+    ready: false
+    restartCount: 11
+    started: true
+    state:
+      running:
+        startedAt: "2023-09-27T18:42:07Z"
+  hostIP: 192.168.1.9
+  phase: Running
+  podIP: 10.1.104.116
+  podIPs:
+  - ip: 10.1.104.116
+  qosClass: BestEffort
+  startTime: "2023-09-12T20:51:19Z"

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"nfs-client-provisioner-678595cbc6-w26z8_963a0980-519e-11ee-8a60-4a0b7885b40b","leaseDurationSeconds":15,"acquireTime":"2023-09-12T19:00:06Z","renewTime":"2023-09-12T19:05:21Z","leaderTransitions":0}'
+  creationTimestamp: "2023-09-12T19:00:06Z"
+  name: example.com-nfs
+  namespace: default
+  resourceVersion: "233410"
+  uid: 7e9e460a-f783-4e32-907b-23a337195a0c

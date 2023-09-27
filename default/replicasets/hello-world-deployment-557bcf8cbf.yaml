@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "2"
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: "2023-09-08T13:52:04Z"
+  generation: 1
+  labels:
+    app: hello-world
+    pod-template-hash: 557bcf8cbf
+  name: hello-world-deployment-557bcf8cbf
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: hello-world-deployment
+    uid: 0927611a-2f46-485b-bc7e-b418d6ad7013
+  resourceVersion: "3119931"
+  uid: 79d3cbc3-e71a-4a1b-9984-98325b6938b0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world
+      pod-template-hash: 557bcf8cbf
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: hello-world
+        pod-template-hash: 557bcf8cbf
+    spec:
+      containers:
+      - image: bhargavshah86/kube-test:v0.1
+        imagePullPolicy: IfNotPresent
+        name: hello-world
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 250m
+            memory: 256Mi
+          requests:
+            cpu: 80m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

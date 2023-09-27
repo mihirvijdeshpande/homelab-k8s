@@ -1,0 +1,14 @@
+apiVersion: coordination.k8s.io/v1
+kind: Lease
+metadata:
+  creationTimestamp: "2023-09-12T18:30:59Z"
+  name: nfs-csi-k8s-io
+  namespace: kube-system
+  resourceVersion: "3120134"
+  uid: 3173cd70-175c-4bcb-a2e8-7fb6926cbcb0
+spec:
+  acquireTime: "2023-09-27T18:42:20.650106Z"
+  holderIdentity: 1695840123218-3849-nfs-csi-k8s-io
+  leaseDurationSeconds: 15
+  leaseTransitions: 283
+  renewTime: "2023-09-27T18:42:46.816873Z"

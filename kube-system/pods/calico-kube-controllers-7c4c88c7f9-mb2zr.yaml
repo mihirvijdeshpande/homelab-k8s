@@ -1,0 +1,151 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: 20b7fc0d99efa7530108b038b815def444796ac23acc1e829d603927d703f35b
+    cni.projectcalico.org/podIP: 10.1.104.119/32
+    cni.projectcalico.org/podIPs: 10.1.104.119/32
+    kubectl.kubernetes.io/restartedAt: "2023-09-08T18:36:55Z"
+  creationTimestamp: "2023-09-08T18:37:54Z"
+  generateName: calico-kube-controllers-7c4c88c7f9-
+  labels:
+    k8s-app: calico-kube-controllers
+    pod-template-hash: 7c4c88c7f9
+  name: calico-kube-controllers-7c4c88c7f9-mb2zr
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: calico-kube-controllers-7c4c88c7f9
+    uid: 47d1b148-5c3a-4447-b7f4-d95681d9b5ed
+  resourceVersion: "3120026"
+  uid: 06c715fb-71b2-4693-99a0-4a25af0c1c0f
+spec:
+  containers:
+  - env:
+    - name: ENABLED_CONTROLLERS
+      value: node
+    - name: DATASTORE_TYPE
+      value: kubernetes
+    image: docker.io/calico/kube-controllers:v3.25.1
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      exec:
+        command:
+        - /usr/bin/check-status
+        - -l
+      failureThreshold: 6
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 10
+    name: calico-kube-controllers
+    readinessProbe:
+      exec:
+        command:
+        - /usr/bin/check-status
+        - -r
+      failureThreshold: 3
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 1
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-5qvs7
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: sve15136cn
+  nodeSelector:
+    kubernetes.io/os: linux
+  preemptionPolicy: PreemptLowerPriority
+  priority: 2000000000
+  priorityClassName: system-cluster-critical
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: calico-kube-controllers
+  serviceAccountName: calico-kube-controllers
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - key: CriticalAddonsOnly
+    operator: Exists
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/control-plane
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-5qvs7
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-08T18:37:56Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-27T18:42:11Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-27T18:42:11Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-08T18:37:55Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://cfd8ecc23dc0430c713338b7fb073e9f5600e7bd259e507a02446a1791c97925
+    image: docker.io/calico/kube-controllers:v3.25.1
+    imageID: docker.io/calico/kube-controllers@sha256:02c1232ee4b8c5a145c401ac1adb34a63ee7fc46b70b6ad0a4e068a774f25f8a
+    lastState:
+      terminated:
+        containerID: containerd://87694d5ce416b5cfa5384776b001433c591e9df20c03b45f2beeb1e85a2d317b
+        exitCode: 255
+        finishedAt: "2023-09-27T18:39:12Z"
+        reason: Unknown
+        startedAt: "2023-09-27T05:37:26Z"
+    name: calico-kube-controllers
+    ready: true
+    restartCount: 38
+    started: true
+    state:
+      running:
+        startedAt: "2023-09-27T18:41:52Z"
+  hostIP: 192.168.1.9
+  phase: Running
+  podIP: 10.1.104.119
+  podIPs:
+  - ip: 10.1.104.119
+  qosClass: BestEffort
+  startTime: "2023-09-08T18:37:56Z"

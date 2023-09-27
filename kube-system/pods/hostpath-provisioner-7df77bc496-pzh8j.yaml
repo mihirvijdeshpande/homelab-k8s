@@ -1,0 +1,138 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    cni.projectcalico.org/containerID: 3f5961d1664fedc5c067d9f04a2fdbdd3f50a786d498c94082863b3a8066e28a
+    cni.projectcalico.org/podIP: 10.1.104.106/32
+    cni.projectcalico.org/podIPs: 10.1.104.106/32
+  creationTimestamp: "2023-09-08T10:27:20Z"
+  generateName: hostpath-provisioner-7df77bc496-
+  labels:
+    k8s-app: hostpath-provisioner
+    pod-template-hash: 7df77bc496
+  name: hostpath-provisioner-7df77bc496-pzh8j
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: hostpath-provisioner-7df77bc496
+    uid: 89bb1f0d-1604-420f-8fba-8085fb477096
+  resourceVersion: "3120052"
+  uid: ae1c2f37-ff9d-41f8-b268-79c20bddd585
+spec:
+  containers:
+  - env:
+    - name: NAMESPACE
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: metadata.namespace
+    - name: NODE_NAME
+      valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: spec.nodeName
+    - name: PV_DIR
+      value: /var/snap/microk8s/common/default-storage
+    - name: BUSYBOX_IMAGE
+      value: busybox:1.28.4
+    image: cdkbot/hostpath-provisioner:1.4.2
+    imagePullPolicy: IfNotPresent
+    name: hostpath-provisioner
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/snap/microk8s/common/default-storage
+      name: pv-volume
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-chlxr
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: sve15136cn
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: microk8s-hostpath
+  serviceAccountName: microk8s-hostpath
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - hostPath:
+      path: /var/snap/microk8s/common/default-storage
+      type: ""
+    name: pv-volume
+  - name: kube-api-access-chlxr
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-08T10:27:21Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-27T18:42:15Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-27T18:42:15Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2023-09-08T10:27:20Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://c094a7dee268d31d322b6f44c323211272a2ffc6998aa0a6759b973776d580c1
+    image: docker.io/cdkbot/hostpath-provisioner:1.4.2
+    imageID: docker.io/cdkbot/hostpath-provisioner@sha256:b8e7be62e9c072adc52ca7e0ff4cffd3687cc39e98171b07884c456104e3fc5c
+    lastState:
+      terminated:
+        containerID: containerd://cbaa41e31c7ff1a2e13baab3b3f66842deb9474e0e7ddff2bf0f4a9848f3d31d
+        exitCode: 255
+        finishedAt: "2023-09-27T18:41:51Z"
+        reason: Error
+        startedAt: "2023-09-27T18:41:03Z"
+    name: hostpath-provisioner
+    ready: true
+    restartCount: 312
+    started: true
+    state:
+      running:
+        startedAt: "2023-09-27T18:42:15Z"
+  hostIP: 192.168.1.9
+  phase: Running
+  podIP: 10.1.104.106
+  podIPs:
+  - ip: 10.1.104.106
+  qosClass: BestEffort
+  startTime: "2023-09-08T10:27:21Z"

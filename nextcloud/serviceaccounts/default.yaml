@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: "2023-09-12T16:39:42Z"
+  name: default
+  namespace: nextcloud
+  resourceVersion: "218075"
+  uid: 4bdddd14-0af5-4031-81ac-d6ef49ab1707

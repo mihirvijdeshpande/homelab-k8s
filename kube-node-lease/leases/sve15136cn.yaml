@@ -1,0 +1,17 @@
+apiVersion: coordination.k8s.io/v1
+kind: Lease
+metadata:
+  creationTimestamp: "2023-08-25T19:22:14Z"
+  name: sve15136cn
+  namespace: kube-node-lease
+  ownerReferences:
+  - apiVersion: v1
+    kind: Node
+    name: sve15136cn
+    uid: 96b2e051-38ca-4b67-9d3d-3e23d2bdd4f9
+  resourceVersion: "3120120"
+  uid: 4a63df43-1f59-4613-92b4-2468623caf9a
+spec:
+  holderIdentity: sve15136cn
+  leaseDurationSeconds: 40
+  renewTime: "2023-09-27T18:42:43.878245Z"

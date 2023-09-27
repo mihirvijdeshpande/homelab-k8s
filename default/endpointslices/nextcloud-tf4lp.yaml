@@ -1,0 +1,43 @@
+addressType: IPv4
+apiVersion: discovery.k8s.io/v1
+endpoints:
+- addresses:
+  - 10.1.104.116
+  conditions:
+    ready: false
+    serving: false
+    terminating: false
+  nodeName: sve15136cn
+  targetRef:
+    kind: Pod
+    name: nextcloud-694d5dbb6d-b9l4w
+    namespace: default
+    uid: 27009d2d-d0a9-46b0-9e86-9a3ac5c29333
+kind: EndpointSlice
+metadata:
+  creationTimestamp: "2023-09-12T20:51:17Z"
+  generateName: nextcloud-
+  generation: 36
+  labels:
+    app.kubernetes.io/component: app
+    app.kubernetes.io/instance: nextcloud
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: nextcloud
+    endpointslice.kubernetes.io/managed-by: endpointslice-controller.k8s.io
+    helm.sh/chart: nextcloud-4.3.1
+    kubernetes.io/service-name: nextcloud
+  name: nextcloud-tf4lp
+  namespace: default
+  ownerReferences:
+  - apiVersion: v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Service
+    name: nextcloud
+    uid: 9b732667-fba3-49ea-abc8-7637699a960b
+  resourceVersion: "3120042"
+  uid: 9b015725-c59f-493d-b51c-a75ab231e78d
+ports:
+- name: http
+  port: 80
+  protocol: TCP

@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "2"
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: "2023-09-08T10:27:18Z"
+  generation: 1
+  labels:
+    k8s-app: hostpath-provisioner
+    pod-template-hash: 7df77bc496
+  name: hostpath-provisioner-7df77bc496
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: hostpath-provisioner
+    uid: e93c5191-c0c2-44bd-a645-5a30b50d37a7
+  resourceVersion: "3120057"
+  uid: 89bb1f0d-1604-420f-8fba-8085fb477096
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: hostpath-provisioner
+      pod-template-hash: 7df77bc496
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        k8s-app: hostpath-provisioner
+        pod-template-hash: 7df77bc496
+    spec:
+      containers:
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: PV_DIR
+          value: /var/snap/microk8s/common/default-storage
+        - name: BUSYBOX_IMAGE
+          value: busybox:1.28.4
+        image: cdkbot/hostpath-provisioner:1.4.2
+        imagePullPolicy: IfNotPresent
+        name: hostpath-provisioner
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/snap/microk8s/common/default-storage
+          name: pv-volume
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: microk8s-hostpath
+      serviceAccountName: microk8s-hostpath
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /var/snap/microk8s/common/default-storage
+          type: ""
+        name: pv-volume
+status:
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1

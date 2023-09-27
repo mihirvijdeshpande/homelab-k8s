@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"nfs-client-provisioner-57769b6f6b-66wcf_0756ffe3-bd6a-4b75-83ce-c0f7791d7f00","leaseDurationSeconds":15,"acquireTime":"2023-09-27T18:41:54Z","renewTime":"2023-09-27T18:42:32Z","leaderTransitions":279}'
+  creationTimestamp: "2023-09-12T19:21:45Z"
+  name: k8s-sigs.io-nfs-subdir-external-provisioner
+  namespace: default
+  resourceVersion: "3120077"
+  uid: 2e034264-935b-4870-9bdb-54ca6bd9e90f

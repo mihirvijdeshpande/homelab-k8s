@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2023-09-27T18:41:58Z"
+  creationTimestamp: "2023-09-08T14:15:46Z"
+  labels:
+    run: nginx
+  name: nginx-deploy-main
+  namespace: default
+  resourceVersion: "3120008"
+  uid: b7b8dd46-7319-41b2-9888-6661984e4ae8
+subsets:
+- addresses:
+  - ip: 10.1.104.94
+    nodeName: sve15136cn
+    targetRef:
+      kind: Pod
+      name: nginx-deploy-main-59657668d9-tgfq6
+      namespace: default
+      uid: 7011e9aa-de27-49ec-8732-4416528c89f2
+  ports:
+  - port: 80
+    protocol: TCP

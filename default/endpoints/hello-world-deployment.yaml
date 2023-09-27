@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  annotations:
+    endpoints.kubernetes.io/last-change-trigger-time: "2023-09-27T18:41:17Z"
+  creationTimestamp: "2023-09-08T14:29:46Z"
+  labels:
+    app: hello-world
+  name: hello-world-deployment
+  namespace: default
+  resourceVersion: "3119933"
+  uid: 279acba4-e7fa-449e-b3ad-5600acc9b846
+subsets:
+- addresses:
+  - ip: 10.1.104.102
+    nodeName: sve15136cn
+    targetRef:
+      kind: Pod
+      name: hello-world-deployment-557bcf8cbf-qfkcl
+      namespace: default
+      uid: 60d0078f-971d-4c55-8bcf-d5b81382f423
+  ports:
+  - port: 80
+    protocol: TCP

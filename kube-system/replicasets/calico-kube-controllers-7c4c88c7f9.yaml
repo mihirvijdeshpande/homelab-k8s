@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  annotations:
+    deployment.kubernetes.io/desired-replicas: "1"
+    deployment.kubernetes.io/max-replicas: "1"
+    deployment.kubernetes.io/revision: "2"
+  creationTimestamp: "2023-09-08T18:37:54Z"
+  generation: 1
+  labels:
+    k8s-app: calico-kube-controllers
+    pod-template-hash: 7c4c88c7f9
+  name: calico-kube-controllers-7c4c88c7f9
+  namespace: kube-system
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Deployment
+    name: calico-kube-controllers
+    uid: 9d523976-d935-4f91-83c2-9b8672f6e445
+  resourceVersion: "3120030"
+  uid: 47d1b148-5c3a-4447-b7f4-d95681d9b5ed
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: calico-kube-controllers
+      pod-template-hash: 7c4c88c7f9
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2023-09-08T18:36:55Z"
+      creationTimestamp: null
+      labels:
+        k8s-app: calico-kube-controllers
+        pod-template-hash: 7c4c88c7f9
+      name: calico-kube-controllers
+      namespace: kube-system
+    spec:
+      containers:
+      - env:
+        - name: ENABLED_CONTROLLERS
+          value: node
+        - name: DATASTORE_TYPE
+          value: kubernetes
+        image: docker.io/calico/kube-controllers:v3.25.1
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - /usr/bin/check-status
+            - -l
+          failureThreshold: 6
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: calico-kube-controllers
+        readinessProbe:
+          exec:
+            command:
+            - /usr/bin/check-status
+            - -r
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        kubernetes.io/os: linux
+      priorityClassName: system-cluster-critical
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: calico-kube-controllers
+      serviceAccountName: calico-kube-controllers
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - key: CriticalAddonsOnly
+        operator: Exists
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/control-plane
+status:
+  availableReplicas: 1
+  fullyLabeledReplicas: 1
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
