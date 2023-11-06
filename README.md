@@ -23,6 +23,8 @@ I had a lot to learn and this project gave me a lot to play around with too.
 
 This project that is uploaded here, is a sample of how I had things setup. After pushing the code to the repository, I had the whole device wiped out, reinstalled Ubuntu Server on it and redid the whole setup from scratch, this time with a media server, nextcloud and metrics server.
 
+I have also added the shell script through which these YAMLs were auto-generated. Since I did not create everything from YAMLs ( sometimes from HELM, sometimes from CLI ) I did not have the YAMLs with me and had to generate them to document what I had created.
+
 Hope you enjoy this and get some inspiration to start your own homelab.
 
 Cheers!
